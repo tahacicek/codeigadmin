@@ -43,14 +43,11 @@ class Members extends CI_Controller
 
     public function insert()
     {
-
-
         $data = array(
 
             "email"     => $this->input->post("email")
 
         );
-
         $insert = $this->member_model->insert($data);
 
 
@@ -77,12 +74,21 @@ class Members extends CI_Controller
 
     public function update($id)
     {
+       // echo $this->input->post("email");
+        //die();
         $data = array(
-            'id' => $id,
-           
+            'email' => $this->input->post("email"),
+            'isActive' => $this->input->post("active")
         );
 
-        $this->db->where('id', $id);
-        $this->db->update($data);
+        $id = $this->member_model->update(array(
+            "id" => $id
+        ), $data);
+
+        if ($id) {
+            echo 'basarılı';
+        } else {
+            echo 'basarılı değil';
+        }
     }
 }
