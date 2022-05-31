@@ -72,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="../widgets.html" class="nav-link">
+                    <a href="<?php echo base_url("categories")?>" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Widgets

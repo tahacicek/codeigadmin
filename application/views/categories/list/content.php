@@ -6,7 +6,7 @@
                 <div class="card">
 
                     <span class="d-flex justify-content-end m-2">
-                        <a href="<?php echo base_url("categories/List") ?>" class="btn btn-primary btn-sm ">Kategori Ekle</a>
+                        <a href="<?php echo base_url("categories/index") ?>" class="btn btn-primary btn-sm ">Kategori Ekle</a>
 
                     </span>
                     <div class="card-header">
@@ -32,10 +32,11 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Email</th>
-                                    <th>Durum</th>
-                                    <th>Tarih</th>
-                                    <th>İşlemler</th>
+                                    <th>Ana Kategori</th>
+                                    <th>Üst Kategori</th>
+                                    <th>Alt Kategori</th>
+                                    <th class="text-center">İşlem</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,11 +44,11 @@
                                 foreach ($items as $item) { ?>
                                     <tr>
                                         <td><?php echo $item->id; ?></td>
-                                        <td><?php echo $item->email; ?></td>
-                                        <td><?php echo $item->isActive; ?></td>
-                                        <td><?php echo $item->createdAt; ?></td>
-                                        <td>
-                                            <a href="<?php echo base_url("members/delete/$item->id") ?>" class="btn btn-primary">Sil</a>
+                                        <td><?php echo $item->AnaKategori; ?></td>
+                                        <td><?php echo $item->ÜstKategori; ?></td>
+                                        <td><?php echo $item->AltKategori; ?></td>
+                                        <td class="text-center">
+                                            <a href="<?php echo base_url("categories/delete/$item->id") ?>" class="btn btn-primary">Sil</a>
 
                                             <button data-toggle="modal" data-target="#modal-default<?= $item->id ?>" class="btn btn-danger">Güncelle</button>
 
@@ -57,31 +58,33 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title"><?= $item->email ?> Düzenliyorsun...</h4>
+                                                    <h4 class="modal-title"><?= $item->AnaKategori ?> Düzenliyorsun...</h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
+                                                        <span aria-hidden="true"></span>
                                                     </button>
                                                 </div>
-                                                <form method="POST" action="<?php echo base_url("Members/update/$item->id") ?>">
+                                                <form method="POST" action="<?php echo base_url("categories/update/$item->id") ?>">
                                                     <div class="modal-body">
 
                                                         <div class="form-group row">
-                                                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                                            <label for="ana" class="col-sm-2 col-form-label">Ana Kategori</label>
                                                             <div class="col-sm-10">
-                                                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?= $item->email ?>">
+                                                                <input type="text" class="form-control" name="ana" id="ana" placeholder="Email" value="<?= $item->AnaKategori ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="email" class="col-sm-2 col-form-label">Durum</label>
-                                                            <select name="active" id="active" class="custom-select rounded-0" id="exampleSelectRounded0">
-                                                                <option <?php if ($item->isActive == 1) {
-                                                                            echo 'checked';
-                                                                        } ?> value="1">Aktif</option>
-                                                                <option <?php if ($item->isActive == 0) {
-                                                                            echo 'checked';
-                                                                        } ?> value="0">Pasif</option>
-                                                            </select>
+                                                            <label for="üst" class="col-sm-2 col-form-label">Üst Kategori</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" name="üst" id="üst" placeholder="Email" value="<?= $item->ÜstKategori ?>">
+                                                            </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label for="alt" class="col-sm-2 col-form-label">Alt Kategori</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" name="alt" id="alt" placeholder="Email" value="<?= $item->AltKategori ?>">
+                                                            </div>
+                                                        </div>
+                                                       
 
                                                     </div>
                                                     <div class="modal-footer justify-content-between">
